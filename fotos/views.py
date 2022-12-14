@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import  Categoria_proyecto, Categoria_artista, Artista
 
 
@@ -16,8 +16,24 @@ def agregar_artista(request):
     if request.method == "POST":
         data=request.POST
         imagen = request.FILES.get("imagen")
-        print("data:",data)
-        print("imagen:",imagen)
+
+        if data["categoria"] != "none":
+            categoria_ = Categoria_artista.objects.get(id=data["categoria"])
+        else:
+            categoria_ = None
+
+    
+        artista = Artista.objects.create(
+            categoria = categoria_,
+            nombre = data["nombre"],
+            apellido = data["apellido"],
+            edad = data["edad"],
+            descripcion = data["descripcion"],
+            imagen = imagen,
+        )
+        return redirect('galeria')
+
+    
 
     return render(request, "agregar_artista.html",context)
 

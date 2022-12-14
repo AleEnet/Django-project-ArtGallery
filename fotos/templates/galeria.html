@@ -17,11 +17,20 @@
                       Categorias
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">All</li>
+                      <li class="list-group-item">
+                        <a href="{% url 'galeria' %}"> 
+                            Todo
+                        </a>
+                      </li>
 
                       {% for categoria in categorias_proyectos %}
                       
-                      <li class="list-group-item">{{categoria.nombre}}</li>
+                      <li class="list-group-item">
+                        <a href="{% url 'galeria' %}?categoria={{categoria.nombre}}">
+                            {{categoria.nombre}}    
+                        </a>
+                        
+                      </li>
 
                       {% endfor %}
 
@@ -47,8 +56,9 @@
                     <div class = "col-md-4">
                         <div class="card my-2">
                             <img class="card-img-top" src= "{{categoria_artista.imagen.url}}">
-                            <div class="card-body">
-                            <small>Nuestros {{categoria_artista.nombre}} </small>
+                            <div class="card-body my-1">
+                            <small>Nuestros</small>
+                            <p>{{categoria_artista.nombre}}</p>     
                             </div>
                             <a class= "btn btn-outline-dark btn-sm m-1" href="{% url 'detalle_artista' 5 %}">Ver</a>
                         </div>

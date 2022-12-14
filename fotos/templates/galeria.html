@@ -17,46 +17,44 @@
                       Categorias
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="All">Cras justo odio</li>
-                      <li class="list-group-item">Cras justo odio</li>
-                      <li class="list-group-item">Dapibus ac facilisis in</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+                      <li class="list-group-item">All</li>
+
+                      {% for categoria in categorias_proyectos %}
+                      
+                      <li class="list-group-item">{{categoria.nombre}}</li>
+
+                      {% endfor %}
+
+                    
+                      
+                        <a href="{% url 'agregar_artista' %}" class="btn btn-block btn-dark btn-sm m-1"> Agregar Artista</a>                       
+
+                      
+                        <a href="{% url 'agregar_obra' %}" class="btn btn-dark btn-sm m-1"> Agregar Obra </a>                       
+
+                      
+                        <a href="{% url 'agregar_galeria' %}" class="btn btn-dark btn-sm m-1"> Agregar Galeria </a>
+                        
+
                     </ul>
                   </div>
             </div>
             <div class = "col-md-9">
                 <div class="row">
 
+                    {% for categoria_artista in categorias_artistas %}
+
                     <div class = "col-md-4">
                         <div class="card my-2">
-                            <img class="card-img-top" src="https://cdn.enterpix.app/images/7d84b4b2-dc1b-4334-b8f8-972b41ae521c/compressed">
+                            <img class="card-img-top" src= "{{categoria_artista.imagen.url}}">
                             <div class="card-body">
-                            <small>Nuestros Pintores</small>
+                            <small>Nuestros {{categoria_artista.nombre}} </small>
                             </div>
                             <a class= "btn btn-outline-dark btn-sm m-1" href="{% url 'detalle_artista' 5 %}">Ver</a>
                         </div>
                     </div>
 
-                    <div class = "col-md-4">
-                        <div class="card my-2">
-                            <img class="card-img-top" src="https://cdn.enterpix.app/images/658cb681-50ec-4b45-a886-2ed865cd657c/compressed" alt="Card image cap">
-                            <div class="card-body">
-                            <small>Nuestros Escultores</small>
-                            </div>
-                            <a class= "btn btn-outline-dark btn-sm m-1" href="{% url 'detalle_artista' 5 %}">Ver</a>
-                        </div>
-                    </div>
-
-                    <div class = "col-md-4">
-                        <div class="card my-2">
-                            <img class="card-img-top" src="https://cdn.enterpix.app/images/a03a7614-9826-44b0-9790-c9c08d21bf8b/compressed" alt="Card image cap">
-                            <div class="card-body">
-                            <small>Nuestros Fotografos</small>
-                            </div>
-                            <a class= "btn btn-outline-dark btn-sm m-1" href="{% url 'detalle_artista' 5 %}">Ver</a>
-                        </div>
-                    </div>
-
+                    {% endfor %}
                     
                 </div>
             </div>
@@ -67,3 +65,4 @@
     
 </body>
 </html>
+

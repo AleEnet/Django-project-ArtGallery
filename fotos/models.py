@@ -26,26 +26,24 @@ class Artista(models.Model):
     imagen = models.ImageField(null= False, blank= False)
 
     def __str__(self):
-        return self.descripcion
+        return self.apellido
     
-
-class Obra(models.Model):
-    nombre = models.CharField(max_length=100)
-    # # nombre
-    # # ano
-    # # tecnica
-    # # estilo
-    # # tamaño
-    # # artista
-    # # galeria
-    # # precio
-    # # vendido
 
 
 class Galeria(models.Model):
     nombre = models.CharField(max_length=100)
-    # nombre
-    # apellido
-    # edad
-    # domicilio
-    # cuadros
+    imagen = models.ImageField(null= True, blank= False)
+    direccion = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.nombre
+
+class Obra(models.Model):
+    nombre = models.CharField(max_length=100)
+    imagen = models.ImageField(null= True, blank= False)
+    ano = models.IntegerField(null= True, blank= False)
+    tipo_de_artista = models.ForeignKey(Categoria_artista, on_delete=models.SET_NULL, null= True, blank=True)
+    artista = models.ForeignKey(Artista, on_delete=models.SET_NULL, null= True, blank=True)
+    galeria = models.ForeignKey(Galeria, on_delete=models.SET_NULL, null= True, blank=True)
+    precio = models.IntegerField(null= True, blank= False)
+    vendido = models.CharField(max_length=100,null= True, blank= False)

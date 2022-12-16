@@ -4,12 +4,19 @@ from .models import  *
 
 def galeria(request):
     categoria = request.GET.get("categoria")
+    tipo_artista = request.GET.get("tipo_artista")
     categorias_proyectos= Categoria_proyecto.objects.all()
     
+    
+
     if categoria == None or categoria == "Artistas":
         elementos = Categoria_artista.objects.all()
         filtro = 0
-        
+        if tipo_artista != None:
+            categoria_artista = Categoria_artista.objects.get(nombre=tipo_artista)
+            elementos = Artista.objects.filter(categoria = categoria_artista)
+            filtro = 3
+
         
     elif categoria == "Obras":
         elementos = Obra.objects.all()
@@ -19,6 +26,7 @@ def galeria(request):
         elementos = Galeria.objects.all()
         filtro = 2
         
+    
 
 
     context = {"categorias_proyectos" : categorias_proyectos, "elementos" : elementos,"filtro": filtro}
@@ -100,18 +108,25 @@ def agregar_galeria(request):
 
 
 
-
-def detalle_artista(request, pk):
-    artista  = Artista.objects.get(id=pk)
-           
-    return render(request, "detalle_artista.html", {"artista": artista})
-
-
-def prueba(request):
-    return render(request,"prueba.html")
-
-
 def buscar(request):
+
+    categoria = request.GET.get("categoria")
+    categorias_proyectos= Categoria_proyecto.objects.all()
+    
+    if categoria == None or categoria == "Artistas":
+        elementos = Categoria_artista.objects.all()
+        filtro = 0
+        
+        
+    elif categoria == "Obras":
+        elementos = Obra.objects.all()
+        filtro = 1
+    
+    else:
+        elementos = Galeria.objects.all()
+        filtro = 2
+  
+ 
     if request.method == "POST":
         busqueda = request.POST["busqueda"]
         lista_artistas = Artista.objects.filter(apellido__contains = busqueda)
@@ -121,7 +136,9 @@ def buscar(request):
         return render (request,"buscar.html", {"busqueda":busqueda,
          "lista_artistas":lista_artistas,
          "lista_obras": lista_obras,
-         "lista_galerias":lista_galeria, })
+         "lista_galerias":lista_galeria,
+         "categorias_proyectos" : categorias_proyectos,
+          "elementos" : elementos,
+          "filtro": filtro })
 
-    else:
-        return render (request,"buscar.html")
+   

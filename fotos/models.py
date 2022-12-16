@@ -47,3 +47,6 @@ class Obra(models.Model):
     galeria = models.ForeignKey(Galeria, on_delete=models.SET_NULL, null= True, blank=True)
     precio = models.IntegerField(null= True, blank= False)
     vendido = models.CharField(max_length=100,null= True, blank= False)
+    
+    def __str__(self):
+        return self.nombre

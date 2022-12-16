@@ -1,24 +1,48 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
+<div class = "col-md-9">
+    <div class="row">
     {% if busqueda %}
 
         <h3> Resultados de {{busqueda}} ....</h3>
         </br>
+        <div class = "col-md-4">
+            {% for artista in lista_artistas %}
+        
+                <div class="card my-4">
+                    <img class="card-img-top" src= "{{artista.imagen.url}}">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Categoria: {{artista.categoria}}</li>
+                        <li class="list-group-item">Nombre: {{artista.nombre}}</li>
+                        <li class="list-group-item">Apellido: {{artista.apellido}}</li>
+                    </ul>
+            {% endfor %}
 
-        {% for artista in lista_artistas %}
-            {{astista}}</br>
-        {% endfor %}
+            {% for obra in lista_obras %}
 
-        {% for obra in lista_obras %}
-            {{obra}} </br>
-        {% endfor %}
+            <div class="card my-2">
+                <img class="card-img-top" src= "{{obra.imagen.url}}">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nombre: {{obra.nombre}}</li>
+                    <li class="list-group-item">Año: {{obra.ano}}</li>
+                    <li class="list-group-item">Autor: {{obra.artista}}</li>
+                    <li class="list-group-item">Galeria: {{obra.galeria}}</li>
+                    <li class="list-group-item">Precio($): {{obra.precio}}</li>
+                    <li class="list-group-item">Vendido: {{obra.vendido}}</li>
+                </ul>
+            {% endfor %}
 
-        {% for galeria in lista_galerias %}
-            {{galeria}}</br>
-        {% endfor %}
+            {% for galeria in lista_galerias %}
+            <div class="card my-2">
+                <img class="card-img-top" src= "{{obra.imagen.url}}">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Galeria: {{galeria.nombre}}</li>
+                    <li class="list-group-item">Dirección: {{galeria.direccion}}</li>
+                </ul>
 
-
+            {% endfor %}
 
     {% else %}
 

@@ -109,3 +109,19 @@ def detalle_artista(request, pk):
 
 def prueba(request):
     return render(request,"prueba.html")
+
+
+def buscar(request):
+    if request.method == "POST":
+        busqueda = request.POST["busqueda"]
+        lista_artistas = Artista.objects.filter(apellido__contains = busqueda)
+        lista_obras = Obra.objects.filter(nombre__contains = busqueda)
+        lista_galeria = Galeria.objects.filter(nombre__contains = busqueda)
+
+        return render (request,"buscar.html", {"busqueda":busqueda,
+         "lista_artistas":lista_artistas,
+         "lista_obras": lista_obras,
+         "lista_galerias":lista_galeria, })
+
+    else:
+        return render (request,"buscar.html")

@@ -1,7 +1,9 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
+<nav class="navbar navbar-light justify-content-between rounded my-1" style="background-color: #bde0fe;">
     <a class="navbar-brand m-4">Art-Galeria</a>
-    <form class="d-flex m-4">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    <form class="d-flex m-4" method= POST action="{% url 'buscar' %}">
+      {% csrf_token %}
+
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Buscar" name="busqueda">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
     </form>
   </nav>

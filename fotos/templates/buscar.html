@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if busqueda %}
+
+        <h3> Resultados de {{busqueda}} ....</h3>
+        </br>
+
+        {% for artista in lista_artistas %}
+            {{astista}}</br>
+        {% endfor %}
+
+        {% for obra in lista_obras %}
+            {{obra}} </br>
+        {% endfor %}
+
+        {% for galeria in lista_galerias %}
+            {{galeria}}</br>
+        {% endfor %}
+
+
+
+    {% else %}
+
+        <h3>No se ingresaron datos a la busqueda</h3>
+    
+    {% endif %}
+
+{% endblock %}

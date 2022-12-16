@@ -8,15 +8,20 @@ def galeria(request):
     
     if categoria == None or categoria == "Artistas":
         elementos = Categoria_artista.objects.all()
+        filtro = 0
+        
         
     elif categoria == "Obras":
         elementos = Obra.objects.all()
+        filtro = 1
     
     else:
         elementos = Galeria.objects.all()
+        filtro = 2
+        
 
 
-    context = {"categorias_proyectos" : categorias_proyectos, "elementos" : elementos}
+    context = {"categorias_proyectos" : categorias_proyectos, "elementos" : elementos,"filtro": filtro}
     return render(request, "galeria.html", context )
 
 
@@ -77,17 +82,20 @@ def agregar_obra(request):
     return render(request, "agregar_obra.html",context)
 
 
+def agregar_galeria(request):
+    
+    if request.method == "POST":
+        data = request.POST
+        image = request.FILES.get("imagen")
+    
+        galeria = Galeria.objects.create(
+            nombre = data["nombre"],
+            direccion = data["direccion"],
+            imagen = image
+        )
+        return redirect('galeria')
 
-
-
-
-
-
-
-
-
-
-
+    return render(request,"agregar_galeria.html")
 
 
 
@@ -97,3 +105,7 @@ def detalle_artista(request, pk):
     artista  = Artista.objects.get(id=pk)
            
     return render(request, "detalle_artista.html", {"artista": artista})
+
+
+def prueba(request):
+    return render(request,"prueba.html")

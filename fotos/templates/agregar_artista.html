@@ -14,14 +14,14 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <a class= "btn btn-dark my-4" href="{% url 'galeria' %}">Volver</a>
-                Formulario
+                NUEVO ARTISTA
                 <div class="card">
 
                     <form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="form-group m-3 ">
-                            <label>Nombre del artista</label>
+                            <label>Agregar un nuevo artista</label>
                             <input required name = nombre type="text" placeholder= "Ingrese el nombre" class="form-control">
                         </div>
 

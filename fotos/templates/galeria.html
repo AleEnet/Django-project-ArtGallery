@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
+{% extends 'layout.html' %}
+
+{% block content %}
+
 <body class="m-5">
     <div class = "container">
         <div class = "row">
             <div class = "col-md-3">
-                <div class="card">
+                <div class="card my-2">
                     <div class="card-header">
                       Categorias
                     </div>
@@ -51,10 +45,29 @@
                     <div class = "col-md-4">
                         <div class="card my-2">
                             <img class="card-img-top" src= "{{elemento.imagen.url}}">
-                            <div class="card-body my-1">
-                            <p>{{elemento.nombre}}</p>     
-                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{elemento.nombre}}</li>
+                            </ul>
+                            
+                            {% if filtro == 0 %}
                             <a class= "btn btn-outline-dark btn-sm m-1" href="{% url 'detalle_artista' 5 %}">Ver</a>
+                            {% elif filtro == 1%}
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Año: {{elemento.ano}}</li>
+                                <li class="list-group-item">Autor: {{elemento.artista}}</li>
+                                <li class="list-group-item">Galeria: {{elemento.galeria}}</li>
+                                <li class="list-group-item">Precio($): {{elemento.precio}}</li>
+                                <li class="list-group-item">Vendido: {{elemento.vendido}}</li>
+                              </ul>
+
+                            {% elif filtro == 2 %}
+
+                            <div class="card-body">
+                                <p>Dirección: {{elemento.direccion}}</p>     
+                            </div>
+                                
+                            {% endif %} 
                         </div>
                     </div>
 
@@ -68,5 +81,6 @@
     </div>
     
 </body>
+{% endblock %}
 </html>
 
